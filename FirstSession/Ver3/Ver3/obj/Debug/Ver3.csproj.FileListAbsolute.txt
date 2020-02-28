@@ -1,0 +1,16 @@
+C:\Users\ArZer0\source\repos\Ver3\Ver3\bin\Debug\Ver3.exe.config
+C:\Users\ArZer0\source\repos\Ver3\Ver3\bin\Debug\Ver3.exe
+C:\Users\ArZer0\source\repos\Ver3\Ver3\bin\Debug\Ver3.pdb
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Ver3.csprojAssemblyReference.cache
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\MainWindow.g.cs
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\App.g.cs
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Ver3_MarkupCompile.cache
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Ver3_MarkupCompile.lref
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\MainWindow.baml
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Ver3.g.resources
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Ver3.Properties.Resources.resources
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Ver3.csproj.GenerateResource.cache
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Ver3.exe
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Ver3.pdb
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Add.g.cs
+C:\Users\ArZer0\source\repos\Ver3\Ver3\obj\Debug\Add.baml
