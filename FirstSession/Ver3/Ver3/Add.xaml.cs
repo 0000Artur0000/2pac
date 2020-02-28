@@ -36,6 +36,10 @@ namespace Ver3
             T3.Items.Add("План");
             T3.Items.Add("Строительство");
             T3.Items.Add("Реализация");
+            T1.MaxLength = 30;
+            T2.MaxLength = 9;
+            T4.MaxLength = 9;
+            T5.MaxLength = 30;
         }
         private void slnadd()
         {
@@ -50,7 +54,7 @@ namespace Ver3
             {
                 T1.Text = "";
                 T2.Text = "";
-                T3.SelectedIndex = 0;
+                T3.SelectedIndex = -1;
                 T4.Text = "";
                 T5.Text = "";
             }
@@ -60,9 +64,12 @@ namespace Ver3
                 {
                     T1.Text = MainWindow.jk.Rows[SelN.SelectedIndex][1].ToString();
                     T2.Text = MainWindow.jk.Rows[SelN.SelectedIndex][4].ToString();
+
                     int b = Int16.Parse(SelN.Text.ToString()[SelN.Text.ToString().Length - 1].ToString()) - 1;
                     string s = MainWindow.jk.Rows[b][3].ToString();
-                    T3.SelectedIndex = s == "plan" ? 0 : s == "built" ? 1 : 2;
+                    if (SelN.Text != "2")
+                        T3.SelectedIndex = s == "plan" ? 0 : s == "built" ? 1 : 2;
+                    else T3.SelectedIndex = 1;
                     T4.Text = MainWindow.jk.Rows[SelN.SelectedIndex][5].ToString();
                     T5.Text = MainWindow.jk.Rows[SelN.SelectedIndex][2].ToString();
                 }
@@ -160,69 +167,182 @@ namespace Ver3
             switch (che)
             {
                 case 0:
-                    DataRow dr = MainWindow.jk.NewRow();
-                    int g = 1;
-                    for (int i = 0; i < MainWindow.jk.Rows.Count; i++)
-                        g = Int32.Parse(MainWindow.jk.Rows[i][0].ToString()) != g ? g : g + 1;
-                    dr[0] = g;
-                    dr[1] = T1.Text;
-                    dr[2] = T5.Text;
-                    dr[3] = T3.Text == "Строительство" ? "built" : T3.Text == "План" ? "plan" : "ready";
-                    dr[4] = Int32.Parse(T2.Text);
-                    dr[5] = Int32.Parse(T4.Text);
-                    //MainWindow.jk.Rows.Add(dr);
-                    Connect.connect(0, dr);
-                    MainWindow.ready();
-                    slnadd();
+                    try
+                    {
+                        DataRow dr = MainWindow.jk.NewRow();
+                        int g = 1;
+                        for (int i = 0; i < MainWindow.jk.Rows.Count; i++)
+                            g = Int32.Parse(MainWindow.jk.Rows[i][0].ToString()) != g ? g : g + 1;
+                        dr[0] = g;
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(T1.Text))
+                                dr[1] = T1.Text;
+                            else MessageBox.Show("Добавьте данные в 1 строку!");
+                        }
+                        catch (Exception)
+                        {
+                            
+                            MessageBox.Show("Некорректные данные в 1 строке!");
+                            goto suda1;
+                        }
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(T5.Text))
+                                dr[2] = T5.Text;
+                            else MessageBox.Show("Добавьте данные в 5 строку!");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Некорректные данные в 5 строке!");
+                            goto suda1;
+                        }
+                        dr[3] = T3.Text == "Строительство" ? "built" : T3.Text == "План" ? "plan" : "ready";
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(T2.Text))
+                                dr[4] = Int32.Parse(T2.Text);
+                            else MessageBox.Show("Добавьте данные во 2 строку!");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Некорректные данные в 2 строке!");
+                            goto suda1;
+                        }
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(T4.Text))
+                                dr[5] = Int32.Parse(T4.Text);
+                            else MessageBox.Show("Добавьте данные в 4 строку!");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Некорректные данные в 4 строке!");
+                            goto suda1;
+                        }
+                        //MainWindow.jk.Rows.Add(dr);
+                        Connect.connect(0, dr);
+                        MainWindow.ready();
+                        slnadd();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Проверьте данные");
+                    };
+                    suda1:
                     break;
                 case 1:
+
                     if (SelN.HasItems)
                     {
                         DataRow dr1 = MainWindow.jk.NewRow();
+                        
                         dr1[0] = MainWindow.jk.Rows[SelN.SelectedIndex][0];
-                        dr1[1] = T1.Text;
-                        dr1[2] = T5.Text;
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(T1.Text))
+                                dr1[1] = T1.Text;
+                            else MessageBox.Show("Добавьте данные в 1 строку!");
+                            
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Некорректные данные в 1 строке!");
+                            goto suda;
+                        };
+
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(T5.Text))
+                                dr1[2] = T5.Text;
+                            else MessageBox.Show("Добавьте данные в 5 строку!");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Некорректные данные в 5 строке!");
+                            goto suda;
+                        }
                         dr1[3] = T3.Text == "Строительство" ? "built" : T3.Text == "План" ? "plan" : "ready";
-                        dr1[4] = Int32.Parse(T2.Text);
-                        dr1[5] = Int32.Parse(T4.Text);
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(T2.Text))
+                                dr1[4] = Int32.Parse(T2.Text);
+                            else MessageBox.Show("Добавьте данные во 2 строку!");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Некорректные данные в 2 строке!");
+                            goto suda;
+                        }
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(T4.Text))
+                                dr1[5] = Int32.Parse(T4.Text);
+                            else MessageBox.Show("Добавьте данные в 4 строку!");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Некорректные данные в 4 строке!");
+                            goto suda;
+                        }
                         //for (int i = 0; i < MainWindow.jk.Columns.Count; i++)
                         //    MainWindow.jk.Rows[SelN.SelectedIndex][i] = dr1[i];
 
                         Connect.connect(1, dr1);
                         //MessageBox.Show(dr1.Table.Columns.Count.ToString());
                         MainWindow.ready();
+                        
                     }
 
+                    suda:
                     break;
                 case 2:
-                    if (SelN.HasItems)
+                    try
                     {
-                        DataRow dr2 = MainWindow.jk.Rows[SelN.SelectedIndex];
-                        //MainWindow.jk.Rows.Remove(dr2);
-                        Connect.connect(2, dr2);
-                        MainWindow.ready();
-                        slnadd();
+                        if (SelN.HasItems)
+                        {
+                            DataRow dr2 = MainWindow.jk.Rows[SelN.SelectedIndex];
+                            //MainWindow.jk.Rows.Remove(dr2);
+                            Connect.connect(2, dr2);
+                            MainWindow.ready();
+                            slnadd();
+                        }
+
                     }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Проверьте данные");
+                    };
                     break;
+                
             }
         }
 
         private void T3_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             bool ch = false;
+
             if (T3.SelectedIndex == 0)
             {
                 if (!String.IsNullOrEmpty(T3.Text))
                     if (!String.IsNullOrEmpty(SelN.Text))
                     {
+                        List<string> ko = new List<string>();
                         //MessageBox.Show(MainWindow.aih.Rows[Int32.Parse(SelN.Text.ToString())][6].ToString());
-                        for (int i = 0; i < MainWindow.aih.Rows.Count; i++)
-                            if (MainWindow.aih.Rows[i][0].ToString() == SelN.Text)
-                                if (MainWindow.aih.Rows[i][6].ToString() == "sold")
-                                    ch = true;
+
+                        for (int i = 0; i < MainWindow.hic.Rows.Count; i++)
+                            if (MainWindow.hic.Rows[i][5].ToString() == SelN.Text)
+                                ko.Add(MainWindow.hic.Rows[i][0].ToString());
+
+                        for (int d = 0; d < ko.Count; d++)
+                            for (int k = 0; k < MainWindow.aih.Rows.Count; k++)
+                                if (MainWindow.aih.Rows[k][0].ToString() == ko[d])
+                                    if (MainWindow.aih.Rows[k][6].ToString() == "sold")
+                                        ch = true;
+
                         if (ch)
                         {
-                            //MessageBox.Show("В этом ЖК уже есть квартиры со статусом \"продана\"");
+                            MessageBox.Show("В этом ЖК уже есть квартиры со статусом \"продана\"");
                             T3.SelectedIndex = 1;
                         }
                     }
@@ -240,5 +360,15 @@ namespace Ver3
                 if (che == 1) edc(false);
             }
         }
+
+        private void SelN_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(SelN.Text))
+            {
+
+                if (che == 1) edc(false);
+            }
+        }
     }
 }
+

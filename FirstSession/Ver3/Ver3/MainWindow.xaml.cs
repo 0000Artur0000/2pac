@@ -39,7 +39,7 @@ namespace Ver3
             jk.Prefix = "Jk";
             aih.Prefix = "apartments_in_houses";
             hic.Prefix = "houses_in_complexes";
-
+            
             
 
             nice.Columns.Add(new DataColumn("№"));
@@ -105,5 +105,8 @@ namespace Ver3
         {
             Application.Current.Shutdown();
         }
+
+
+
     }
 }

@@ -13,13 +13,14 @@ namespace Ver3
     {
         private static SqlConnectionStringBuilder connS = new SqlConnectionStringBuilder()
         {
-            // DataSource = "303-2\\SQLEXPRESS",
-            DataSource = "DESKTOP-U5HC5KL",
+             DataSource = "303-2\\SQLEXPRESS",
+            //DataSource = "DESKTOP-U5HC5KL",
             InitialCatalog = "Ver2",
             IntegratedSecurity = true
         };
         public static void connect()
         {
+            
             using (SqlConnection conn = new SqlConnection(connS.ConnectionString))
             {
                 conn.Open();
