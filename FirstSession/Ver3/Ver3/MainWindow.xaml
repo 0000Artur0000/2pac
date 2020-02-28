@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Программа для колледжа V3" Height="450" Width="800" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
-        <DataGrid x:Name="testGrid" Margin="10,70,10,80" Foreground="#FF243238" Background="#00FF4A6D" FontFamily="Tahoma" BorderBrush="#00688CAF"/>
+        <DataGrid x:Name="testGrid" Margin="10,70,10,80" Foreground="#FF243238" Background="#00FF4A6D" FontFamily="Tahoma" BorderBrush="#00688CAF" IsReadOnly="True"/>
         <Button Content="Изменить" HorizontalAlignment="Center" Margin="271,0,271,30" Width="250" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click_1" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
         <Button Content="Удалить" HorizontalAlignment="Center" Margin="532,0,10,30" Width="250" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click_2" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
         <Button Content="Добавить" HorizontalAlignment="Center" Margin="10,0,532,30" Width="250" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
