@@ -10,7 +10,7 @@
         <Button Content="Отмена" HorizontalAlignment="Left" Height="30" Margin="421,161,0,0" VerticalAlignment="Top" Width="119" Click="Button_Click" Foreground="#FF243238" Background="White"/>
         <Label x:Name="TitleL" Content="Добавление записи" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.175,0.013" Width="241" FontSize="14" FontFamily="Tahoma" FontWeight="Bold" Foreground="#FF243238"/>
         <Label x:Name="L1" Content="Название жилищного комплекса:" HorizontalAlignment="Left" Margin="7,41,0,0" VerticalAlignment="Top" Width="196" FontFamily="Tahoma" Foreground="#FF243238"/>
-        <TextBox x:Name="T1" HorizontalAlignment="Left" Height="25" Margin="10,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Foreground="#FF243238" UndoLimit="5"/>
+        <TextBox x:Name="T1" HorizontalAlignment="Left" Height="25" Margin="10,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Foreground="#FF243238"/>
         <Label x:Name="L2" Content="Добавочная стоимость:" HorizontalAlignment="Left" Margin="206,41,0,0" VerticalAlignment="Top" Width="147" FontFamily="Tahoma" Foreground="#FF243238"/>
         <TextBox x:Name="T2" HorizontalAlignment="Left" Height="25" Margin="211,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Foreground="#FF243238"/>
         <Label x:Name="L3" Content="Статус:" HorizontalAlignment="Left" Margin="353,41,0,0" VerticalAlignment="Top" Width="67" FontFamily="Tahoma" Foreground="#FF243238"/>
@@ -19,7 +19,7 @@
         <TextBox x:Name="T4" HorizontalAlignment="Left" Height="25" Margin="10,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Foreground="#FF243238"/>
         <Label x:Name="L5" Content="Город ЖК:" HorizontalAlignment="Left" Margin="167,95,0,0" VerticalAlignment="Top" Width="158" FontFamily="Tahoma" Foreground="#FF243238"/>
         <TextBox x:Name="T5" HorizontalAlignment="Left" Height="25" Margin="170,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Foreground="#FF243238"/>
-        <ComboBox x:Name="SelN" Margin="0,10,10,0" VerticalAlignment="Top" SelectedIndex="0" HorizontalAlignment="Right" Width="113" DropDownClosed="SelN_DropDownClosed" Height="25" Foreground="#FF243238" SelectionChanged="SelN_SelectionChanged"/>
+        <ComboBox x:Name="SelN" Margin="0,10,10,0" VerticalAlignment="Top" SelectedIndex="0" HorizontalAlignment="Right" Width="113" DropDownClosed="SelN_DropDownClosed" Height="25" Foreground="#FF243238"/>
         <Label x:Name="LbN" Content="№ Записи:" Margin="0,10,130,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="67" Foreground="#FF243238"/>
         <Button x:Name="btnJob" Content="Добавить" HorizontalAlignment="Left" Height="30" Margin="10,161,0,0" VerticalAlignment="Top" Width="217" Click="btnJob_Click" Foreground="#FF243238" Background="White"/>
 

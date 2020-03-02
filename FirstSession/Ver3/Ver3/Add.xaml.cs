@@ -32,20 +32,61 @@ namespace Ver3
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            slnadd();
-            T3.Items.Add("План");
-            T3.Items.Add("Строительство");
-            T3.Items.Add("Реализация");
-            T1.MaxLength = 30;
-            T2.MaxLength = 9;
-            T4.MaxLength = 9;
-            T5.MaxLength = 30;
+
+
+
+        }
+        private void loadd()
+        {
+            if (MainWindow._page == 0)
+            {
+                slnadd();
+                T3.Items.Clear();
+                T3.Items.Add("План");
+                T3.Items.Add("Строительство");
+                T3.Items.Add("Реализация");
+                T1.MaxLength = 30;
+                T2.MaxLength = 9;
+                T4.MaxLength = 9;
+                T5.MaxLength = 30;
+                L1.Content = "Название жилищного комплекса:";
+                L2.Content = "Добавочная стоимость:";
+                L3.Content = "Статус:";
+                L4.Content = "Затраты на строительство:";
+                L5.Content = "Город ЖК:";
+
+
+            }
+            else
+            {
+                slnadd1();
+                T3.Items.Clear();
+                for (int i = 0; i < MainWindow.listall[0].Rows.Count; i++)
+                    T3.Items.Add(MainWindow.listall[0].Rows[i][1].ToString());
+
+                T1.MaxLength = 30;
+                T2.MaxLength = 5;
+                T4.MaxLength = 9;
+                T5.MaxLength = 9;
+                L1.Content = "Улица:";
+                L2.Content = "№ Дома:";
+                L3.Content = "ЖК:";
+                L4.Content = "Добавочная стоимость:";
+                L5.Content = "Затраты на строительство::";
+            }
+        }
+        private void slnadd1()
+        {
+            SelN.Items.Clear();
+            for (int i = 0; i < MainWindow.listall[4].Rows.Count; i++)
+                SelN.Items.Add(MainWindow.listall[4].Rows[i][0]);
+            SelN.SelectedIndex = 0;
         }
         private void slnadd()
         {
             SelN.Items.Clear();
-            for (int i = 0; i < MainWindow.nice.Rows.Count; i++)
-                SelN.Items.Add(MainWindow.nice.Rows[i][0]);
+            for (int i = 0; i < MainWindow.listall[3].Rows.Count; i++)
+                SelN.Items.Add(MainWindow.listall[3].Rows[i][0]);
             SelN.SelectedIndex = 0;
         }
         private void edc(bool j)
@@ -62,16 +103,29 @@ namespace Ver3
             {
                 if (SelN.HasItems)
                 {
-                    T1.Text = MainWindow.jk.Rows[SelN.SelectedIndex][1].ToString();
-                    T2.Text = MainWindow.jk.Rows[SelN.SelectedIndex][4].ToString();
+                    if (MainWindow._page == 0)
+                    {
+                        T1.Text = MainWindow.listall[0].Rows[SelN.SelectedIndex][1].ToString();
+                        T2.Text = MainWindow.listall[0].Rows[SelN.SelectedIndex][4].ToString();
 
-                    int b = Int16.Parse(SelN.Text.ToString()[SelN.Text.ToString().Length - 1].ToString()) - 1;
-                    string s = MainWindow.jk.Rows[b][3].ToString();
-                    if (SelN.Text != "2")
-                        T3.SelectedIndex = s == "plan" ? 0 : s == "built" ? 1 : 2;
-                    else T3.SelectedIndex = 1;
-                    T4.Text = MainWindow.jk.Rows[SelN.SelectedIndex][5].ToString();
-                    T5.Text = MainWindow.jk.Rows[SelN.SelectedIndex][2].ToString();
+                        int b = Int16.Parse(SelN.Text.ToString()[SelN.Text.ToString().Length - 1].ToString()) - 1;
+                        string s = MainWindow.listall[0].Rows[b][3].ToString();
+                        if (SelN.Text != "2")
+                            T3.SelectedIndex = s == "plan" ? 0 : s == "built" ? 1 : 2;
+                        else T3.SelectedIndex = 1;
+                        T4.Text = MainWindow.listall[0].Rows[SelN.SelectedIndex][5].ToString();
+                        T5.Text = MainWindow.listall[0].Rows[SelN.SelectedIndex][2].ToString();
+                    }
+                    else
+                    {
+                        T1.Text = MainWindow.listall[1].Rows[SelN.SelectedIndex][1].ToString();
+                        T2.Text = MainWindow.listall[1].Rows[SelN.SelectedIndex][2].ToString();
+                        for (int i = 0; i < MainWindow.listall[0].Rows.Count; i++)
+                            if (MainWindow.listall[1].Rows[SelN.SelectedIndex][5].ToString() == MainWindow.listall[0].Rows[i][0].ToString())
+                                T3.SelectedIndex = i;
+                        T4.Text = MainWindow.listall[1].Rows[SelN.SelectedIndex][4].ToString();
+                        T5.Text = MainWindow.listall[1].Rows[SelN.SelectedIndex][3].ToString();
+                    }
                 }
             }
         }
@@ -80,6 +134,7 @@ namespace Ver3
             switch (i)
             {
                 case 0:
+                    loadd();
                     TitleL.Content = "Добавление записи";
                     btnJob.Content = "Добавить";
                     LbN.Visibility = Visibility.Hidden;
@@ -88,6 +143,7 @@ namespace Ver3
                     edc(true);
                     break;
                 case 1:
+                    loadd();
                     TitleL.Content = "Изменение записи";
                     btnJob.Content = "Изменить";
                     LbN.Visibility = Visibility.Visible;
@@ -96,6 +152,7 @@ namespace Ver3
                     edc(false);
                     break;
                 case 2:
+                    loadd();
                     TitleL.Content = "Удаление записи";
                     btnJob.Content = "Удалить";
                     LbN.Visibility = Visibility.Visible;
@@ -167,12 +224,13 @@ namespace Ver3
             switch (che)
             {
                 case 0:
-                    try
+                    if (MainWindow._page == 0)
                     {
-                        DataRow dr = MainWindow.jk.NewRow();
+
+                        DataRow dr = MainWindow.listall[0].NewRow();
                         int g = 1;
-                        for (int i = 0; i < MainWindow.jk.Rows.Count; i++)
-                            g = Int32.Parse(MainWindow.jk.Rows[i][0].ToString()) != g ? g : g + 1;
+                        for (int i = 0; i < MainWindow.listall[0].Rows.Count; i++)
+                            g = Int32.Parse(MainWindow.listall[0].Rows[i][0].ToString()) != g ? g : g + 1;
                         dr[0] = g;
                         try
                         {
@@ -182,7 +240,7 @@ namespace Ver3
                         }
                         catch (Exception)
                         {
-                            
+
                             MessageBox.Show("Некорректные данные в 1 строке!");
                             goto suda1;
                         }
@@ -220,101 +278,177 @@ namespace Ver3
                             MessageBox.Show("Некорректные данные в 4 строке!");
                             goto suda1;
                         }
-                        //MainWindow.jk.Rows.Add(dr);
+                        //MainWindow.listall[0].Rows.Add(dr);
                         Connect.connect(0, dr);
                         MainWindow.ready();
                         slnadd();
                     }
-                    catch (Exception)
+                    else
                     {
-                        MessageBox.Show("Проверьте данные");
-                    };
+                        DataRow dr = MainWindow.listall[1].NewRow();
+                        int g = 1;
+                        for (int i = 0; i < MainWindow.listall[1].Rows.Count; i++)
+                            g = Int32.Parse(MainWindow.listall[1].Rows[i][0].ToString()) != g ? g : g + 1;
+                        dr[0] = g;
+
+                        if (!String.IsNullOrEmpty(T1.Text))
+                            dr[1] = T1.Text;
+                        else MessageBox.Show("Добавьте данные в 1 строку!");
+
+
+                        if (!String.IsNullOrEmpty(T2.Text))
+                            dr[2] = T2.Text;
+                        else MessageBox.Show("Добавьте данные в 2 строку!");
+                        for (int i = 0; i < MainWindow.listall[0].Rows.Count; i++)
+                            if (T3.Text == MainWindow.listall[0].Rows[i][1].ToString())
+                                dr[5] = MainWindow.listall[0].Rows[i][0];
+
+
+                        if (!String.IsNullOrEmpty(T5.Text))
+                            dr[3] = Int32.Parse(T5.Text);
+                        else MessageBox.Show("Добавьте данные во 5 строку!");
+
+
+                        if (!String.IsNullOrEmpty(T4.Text))
+                            dr[4] = Int32.Parse(T4.Text);
+                        else MessageBox.Show("Добавьте данные в 4 строку!");
+
+                        //MainWindow.listall[0].Rows.Add(dr);
+                        Connect.connect(3, dr);
+                        MainWindow.ready();
+                        slnadd();
+                    }
+
                     suda1:
                     break;
                 case 1:
 
                     if (SelN.HasItems)
                     {
-                        DataRow dr1 = MainWindow.jk.NewRow();
-                        
-                        dr1[0] = MainWindow.jk.Rows[SelN.SelectedIndex][0];
-                        try
+                        if (MainWindow._page == 0)
                         {
+                            DataRow dr1 = MainWindow.listall[0].NewRow();
+
+                            dr1[0] = MainWindow.listall[0].Rows[SelN.SelectedIndex][0];
+                            try
+                            {
+                                if (!String.IsNullOrEmpty(T1.Text))
+                                    dr1[1] = T1.Text;
+                                else MessageBox.Show("Добавьте данные в 1 строку!");
+
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Некорректные данные в 1 строке!");
+                                goto suda;
+                            };
+
+                            try
+                            {
+                                if (!String.IsNullOrEmpty(T5.Text))
+                                    dr1[2] = T5.Text;
+                                else MessageBox.Show("Добавьте данные в 5 строку!");
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Некорректные данные в 5 строке!");
+                                goto suda;
+                            }
+                            dr1[3] = T3.Text == "Строительство" ? "built" : T3.Text == "План" ? "plan" : "ready";
+                            try
+                            {
+                                if (!String.IsNullOrEmpty(T2.Text))
+                                    dr1[4] = Int32.Parse(T2.Text);
+                                else MessageBox.Show("Добавьте данные во 2 строку!");
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Некорректные данные в 2 строке!");
+                                goto suda;
+                            }
+                            try
+                            {
+                                if (!String.IsNullOrEmpty(T4.Text))
+                                    dr1[5] = Int32.Parse(T4.Text);
+                                else MessageBox.Show("Добавьте данные в 4 строку!");
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Некорректные данные в 4 строке!");
+                                goto suda;
+                            }
+                            //for (int i = 0; i < MainWindow.listall[0].Columns.Count; i++)
+                            //    MainWindow.listall[0].Rows[SelN.SelectedIndex][i] = dr1[i];
+
+                            Connect.connect(1, dr1);
+                            //MessageBox.Show(dr1.Table.Columns.Count.ToString());
+                            MainWindow.ready();
+
+                        }
+                        else
+                        {
+                            DataRow dr1 = MainWindow.listall[1].NewRow();
+
+                            dr1[0] = MainWindow.listall[1].Rows[SelN.SelectedIndex][0];
+
                             if (!String.IsNullOrEmpty(T1.Text))
                                 dr1[1] = T1.Text;
                             else MessageBox.Show("Добавьте данные в 1 строку!");
-                            
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Некорректные данные в 1 строке!");
-                            goto suda;
-                        };
 
-                        try
-                        {
-                            if (!String.IsNullOrEmpty(T5.Text))
-                                dr1[2] = T5.Text;
-                            else MessageBox.Show("Добавьте данные в 5 строку!");
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Некорректные данные в 5 строке!");
-                            goto suda;
-                        }
-                        dr1[3] = T3.Text == "Строительство" ? "built" : T3.Text == "План" ? "plan" : "ready";
-                        try
-                        {
+
                             if (!String.IsNullOrEmpty(T2.Text))
-                                dr1[4] = Int32.Parse(T2.Text);
-                            else MessageBox.Show("Добавьте данные во 2 строку!");
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Некорректные данные в 2 строке!");
-                            goto suda;
-                        }
-                        try
-                        {
-                            if (!String.IsNullOrEmpty(T4.Text))
-                                dr1[5] = Int32.Parse(T4.Text);
-                            else MessageBox.Show("Добавьте данные в 4 строку!");
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Некорректные данные в 4 строке!");
-                            goto suda;
-                        }
-                        //for (int i = 0; i < MainWindow.jk.Columns.Count; i++)
-                        //    MainWindow.jk.Rows[SelN.SelectedIndex][i] = dr1[i];
+                                dr1[2] = T2.Text;
+                            else MessageBox.Show("Добавьте данные в 2 строку!");
+                            for (int i = 0; i < MainWindow.listall[0].Rows.Count; i++)
+                                if (T3.Text == MainWindow.listall[0].Rows[i][1].ToString())
+                                    dr1[5] = MainWindow.listall[0].Rows[i][0];
 
-                        Connect.connect(1, dr1);
-                        //MessageBox.Show(dr1.Table.Columns.Count.ToString());
-                        MainWindow.ready();
-                        
+
+                            if (!String.IsNullOrEmpty(T5.Text))
+                                dr1[3] = Int32.Parse(T5.Text);
+                            else MessageBox.Show("Добавьте данные во 5 строку!");
+
+
+                            if (!String.IsNullOrEmpty(T4.Text))
+                                dr1[4] = Int32.Parse(T4.Text);
+                            else MessageBox.Show("Добавьте данные в 4 строку!");
+
+                            //for (int i = 0; i < MainWindow.listall[0].Columns.Count; i++)
+                            //    MainWindow.listall[0].Rows[SelN.SelectedIndex][i] = dr1[i];
+
+                            Connect.connect(4, dr1);
+                            //MessageBox.Show(dr1.Table.Columns.Count.ToString());
+                            MainWindow.ready();
+                        }
                     }
 
                     suda:
                     break;
                 case 2:
-                    try
+
+                    if (SelN.HasItems)
                     {
-                        if (SelN.HasItems)
+                        if (MainWindow._page == 0)
                         {
-                            DataRow dr2 = MainWindow.jk.Rows[SelN.SelectedIndex];
-                            //MainWindow.jk.Rows.Remove(dr2);
+                            DataRow dr2 = MainWindow.listall[0].Rows[SelN.SelectedIndex];
+                            //MainWindow.listall[0].Rows.Remove(dr2);
                             Connect.connect(2, dr2);
                             MainWindow.ready();
                             slnadd();
                         }
-
+                        else
+                        {
+                            DataRow dr2 = MainWindow.listall[1].Rows[SelN.SelectedIndex];
+                            //MainWindow.listall[0].Rows.Remove(dr2);
+                            Connect.connect(5, dr2);
+                            MainWindow.ready();
+                            slnadd();
+                        }
                     }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Проверьте данные");
-                    };
+
+
                     break;
-                
+
             }
         }
 
@@ -327,23 +461,26 @@ namespace Ver3
                 if (!String.IsNullOrEmpty(T3.Text))
                     if (!String.IsNullOrEmpty(SelN.Text))
                     {
-                        List<string> ko = new List<string>();
-                        //MessageBox.Show(MainWindow.aih.Rows[Int32.Parse(SelN.Text.ToString())][6].ToString());
-
-                        for (int i = 0; i < MainWindow.hic.Rows.Count; i++)
-                            if (MainWindow.hic.Rows[i][5].ToString() == SelN.Text)
-                                ko.Add(MainWindow.hic.Rows[i][0].ToString());
-
-                        for (int d = 0; d < ko.Count; d++)
-                            for (int k = 0; k < MainWindow.aih.Rows.Count; k++)
-                                if (MainWindow.aih.Rows[k][0].ToString() == ko[d])
-                                    if (MainWindow.aih.Rows[k][6].ToString() == "sold")
-                                        ch = true;
-
-                        if (ch)
+                        if (che == 2)
                         {
-                            MessageBox.Show("В этом ЖК уже есть квартиры со статусом \"продана\"");
-                            T3.SelectedIndex = 1;
+                            List<string> ko = new List<string>();
+                            //MessageBox.Show(MainWindow.listall[2].Rows[Int32.Parse(SelN.Text.ToString())][6].ToString());
+
+                            for (int i = 0; i < MainWindow.listall[1].Rows.Count; i++)
+                                if (MainWindow.listall[1].Rows[i][5].ToString() == SelN.Text)
+                                    ko.Add(MainWindow.listall[1].Rows[i][0].ToString());
+
+                            for (int d = 0; d < ko.Count; d++)
+                                for (int k = 0; k < MainWindow.listall[2].Rows.Count; k++)
+                                    if (MainWindow.listall[2].Rows[k][0].ToString() == ko[d])
+                                        if (MainWindow.listall[2].Rows[k][6].ToString() == "sold")
+                                            ch = true;
+
+                            if (ch)
+                            {
+                                MessageBox.Show("В этом ЖК уже есть квартиры со статусом \"продана\"");
+                                T3.SelectedIndex = 1;
+                            }
                         }
                     }
             }
@@ -371,4 +508,3 @@ namespace Ver3
         }
     }
 }
-

@@ -7,12 +7,20 @@
         mc:Ignorable="d"
         Title="Программа для колледжа V3" Height="450" Width="800" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
-        <DataGrid x:Name="testGrid" Margin="10,70,10,80" Foreground="#FF243238" Background="#00FF4A6D" FontFamily="Tahoma" BorderBrush="#00688CAF" IsReadOnly="True"/>
-        <Button Content="Изменить" HorizontalAlignment="Center" Margin="271,0,271,30" Width="250" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click_1" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
-        <Button Content="Удалить" HorizontalAlignment="Center" Margin="532,0,10,30" Width="250" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click_2" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
-        <Button Content="Добавить" HorizontalAlignment="Center" Margin="10,0,532,30" Width="250" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
+        <Button Content="Изменить" HorizontalAlignment="Left" Margin="170,0,0,10" Width="150" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click_1" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
+        <Button Content="Удалить" HorizontalAlignment="Left" Margin="330,0,0,10" Width="150" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click_2" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Margin="10,0,0,10" Width="150" Background="#FFFF4A6D" Height="35" VerticalAlignment="Bottom" Click="Button_Click" Foreground="#FF243238" FontSize="14" FontFamily="Tahoma"/>
         <Image Margin="10,10,0,0" Source="logo.png" Stretch="Fill" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" Width="139"/>
-        <Label Content="Жилищные комплексы" HorizontalAlignment="Left" Margin="154,20,0,0" VerticalAlignment="Top" Width="266" Height="27" FontSize="14" FontWeight="Bold" FontFamily="Tahoma"/>
+        <Label x:Name="LogoLab" Content="Список жилищных комплексов" HorizontalAlignment="Left" Margin="154,20,0,0" VerticalAlignment="Top" Width="266" Height="27" FontSize="14" FontWeight="Bold" FontFamily="Tahoma"/>
+        <Grid Margin="60,70,60,71" Background="#FFFF4A6D">
+            <DataGrid x:Name="testGrid" Margin="10,10,10,40" Foreground="#FF243238" Background="White" FontFamily="Tahoma" BorderBrush="#00688CAF"/>
+            <Button Content="⇒⇒" Margin="622,0,10,10" Background="#FFFF4A6D" Height="30" VerticalAlignment="Bottom" Foreground="White" FontSize="20" FontFamily="Tahoma" Padding="0" HorizontalAlignment="Center" Width="40" Click="Button_Click_5"/>
+            <Button Content="⇐⇐" Margin="10,0,622,10" Background="#FFFF4A6D" Height="30" VerticalAlignment="Bottom" Foreground="White" FontSize="20" FontFamily="Tahoma" Padding="0" HorizontalAlignment="Center" Width="40" Click="Button_Click_8"/>
+            <Button Content="⇒" HorizontalAlignment="Center" Margin="412,0,220,10" Width="40" Background="#FFFF4A6D" Height="30" VerticalAlignment="Bottom" Foreground="White" FontSize="20" FontFamily="Tahoma" Padding="0" Click="Button_Click_6"/>
+            <Button Content="⇐" HorizontalAlignment="Center" Margin="220,0,412,10" Width="40" Background="#FFFF4A6D" Height="30" VerticalAlignment="Bottom" Foreground="White" FontSize="20" FontFamily="Tahoma" Padding="0" Click="Button_Click_7"/>
+        </Grid>
+        <Button Content="⇒" HorizontalAlignment="Right" Margin="0,167,10,167" Width="40" Background="#FFFF4A6D" Foreground="White" FontSize="20" FontFamily="Tahoma" Padding="0" MaxHeight="85" Click="Button_Click_3"/>
+        <Button Content="⇐" Margin="10,167,0,167" Background="#FFFF4A6D" Foreground="White" FontSize="20" FontFamily="Tahoma" Padding="0" MaxHeight="85" HorizontalAlignment="Left" Width="40" Click="Button_Click_4"/>
 
     </Grid>
 </Window>
